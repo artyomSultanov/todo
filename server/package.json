@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "jsonserver",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artyomSultanov/todo.git"
+  },
+  "keywords": [
+    "jsonserver",
+    "todo",
+    "app",
+    "rest",
+    "api",
+    "restful"
+  ],
+  "author": "Artyom <ya.artyomsultanov@ya.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/artyomSultanov/todo/issues"
+  },
+  "homepage": "https://github.com/artyomSultanov/todo#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
