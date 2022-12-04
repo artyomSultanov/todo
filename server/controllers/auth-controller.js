@@ -4,6 +4,7 @@ class AuthController {
   async signup(req, res) {
     try {
       const { email, password } = req.body
+      console.log('SERVER CONTROLLER SIGNUP', email, password)
 
       const userData = await authService.signup(email, password)
 
@@ -13,6 +14,7 @@ class AuthController {
       })
       return res.status(201).json(userData)
     } catch (error) {
+      console.log('ERROR', error)
       return res
         .status(error.status)
         .json({ message: error.message, errors: error.errors })
