@@ -1,6 +1,7 @@
+import { AxiosError } from 'axios'
 import api from 'config/api'
 import { IUser } from 'types/user-type'
-import { IAuthResponse } from 'types/response-type'
+import { IAuthResponse, IErrorResponse } from 'types/response-type'
 
 interface AuthServiceModel {
   signup(email: string, password: string): Promise<IAuthResponse>
@@ -17,7 +18,10 @@ class AuthService implements AuthServiceModel {
 
       return { user: data, error: '' }
     } catch (error) {
-      return this.getError(`${error}`)
+      const axiosError = error as AxiosError
+      const { status, data }: IErrorResponse =
+        axiosError.response as IErrorResponse
+      return this.getError(`Status: ${status}.\nMessage: ${data.message}`)
     }
   }
 
@@ -29,7 +33,10 @@ class AuthService implements AuthServiceModel {
       })
       return { user: data, error: '' }
     } catch (error) {
-      return this.getError(`${error}`)
+      const axiosError = error as AxiosError
+      const { status, data }: IErrorResponse =
+        axiosError.response as IErrorResponse
+      return this.getError(`Status: ${status}.\nMessage: ${data.message}`)
     }
   }
 

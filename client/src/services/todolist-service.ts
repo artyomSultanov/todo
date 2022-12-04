@@ -1,5 +1,6 @@
+import { AxiosError } from 'axios'
 import api from 'config/api'
-import { ITodolistResponse } from 'types/response-type'
+import { IErrorResponse, ITodolistResponse } from 'types/response-type'
 import { ITodo } from 'types/todo-type'
 
 interface TodoListServiceModel {
@@ -18,7 +19,10 @@ class TodolistService implements TodoListServiceModel {
 
       return { todos: data, error: '' }
     } catch (error) {
-      return this.getError(`${error}`)
+      const axiosError = error as AxiosError
+      const { status, data }: IErrorResponse =
+        axiosError.response as IErrorResponse
+      return this.getError(`Status: ${status}.\nMessage: ${data.message}`)
     }
   }
 
@@ -28,7 +32,10 @@ class TodolistService implements TodoListServiceModel {
 
       return { error: '' }
     } catch (error) {
-      return this.getError(`${error}`)
+      const axiosError = error as AxiosError
+      const { status, data }: IErrorResponse =
+        axiosError.response as IErrorResponse
+      return this.getError(`Status: ${status}.\nMessage: ${data.message}`)
     }
   }
 
@@ -40,7 +47,10 @@ class TodolistService implements TodoListServiceModel {
 
       return { error: '' }
     } catch (error) {
-      return this.getError(`${error}`)
+      const axiosError = error as AxiosError
+      const { status, data }: IErrorResponse =
+        axiosError.response as IErrorResponse
+      return this.getError(`Status: ${status}.\nMessage: ${data.message}`)
     }
   }
 
@@ -50,7 +60,10 @@ class TodolistService implements TodoListServiceModel {
 
       return { error: '' }
     } catch (error) {
-      return this.getError(`${error}`)
+      const axiosError = error as AxiosError
+      const { status, data }: IErrorResponse =
+        axiosError.response as IErrorResponse
+      return this.getError(`Status: ${status}.\nMessage: ${data.message}`)
     }
   }
 

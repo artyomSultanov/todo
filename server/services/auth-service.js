@@ -7,7 +7,6 @@ const UserDto = require('../dto/user-dto')
 
 class AuthService {
   async signup(email, password) {
-    console.log('SERVER SERVICE SIGNUP', email, password)
     if (db.find((user) => user.email === email))
       throw ApiError.BadRequest('Пользователь с таким email уже существует.')
 
@@ -28,12 +27,12 @@ class AuthService {
   async signin(email, password) {
     const user = db.find((user) => user.email === email)
 
-    if (!user) throw ApiError.BadRequest('Неправильный email или пароль.')
+    if (!user) throw ApiError.BadRequest('Неправильный логин или пароль.')
 
     const isEqualPasswords = await bcrypt.compare(password, user.password)
 
     if (!isEqualPasswords)
-      throw ApiError.BadRequest('Неправильный email или пароль.')
+      throw ApiError.BadRequest('Неправильный логин или пароль.')
 
     const userDto = new UserDto(user)
 

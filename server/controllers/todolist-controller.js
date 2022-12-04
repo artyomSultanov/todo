@@ -13,10 +13,7 @@ class TodolistController {
 
       return res.json(todos)
     } catch (error) {
-      console.log(error)
-      return res
-        .status(error.status)
-        .json({ message: error.message, errors: error.errors })
+      return res.status(error.status).json(error.message)
     }
   }
   async markOne(req, res) {
@@ -30,9 +27,7 @@ class TodolistController {
 
       return res.status(200)
     } catch (error) {
-      return res
-        .status(error.status)
-        .json({ message: error.message, errors: error.errors })
+      return res.status(error.status).json(error.message)
     }
   }
   async addOne(req, res) {
@@ -46,9 +41,7 @@ class TodolistController {
 
       return res.status(201)
     } catch (error) {
-      return res
-        .status(error.status)
-        .json({ message: error.message, errors: error.errors })
+      return res.status(error.status).json(error.message)
     }
   }
   async deleteOne(req, res) {
@@ -62,9 +55,7 @@ class TodolistController {
 
       return res.status(200)
     } catch (error) {
-      return res
-        .status(error.status)
-        .json({ message: error.message, errors: error.errors })
+      return res.status(error.status).json(error.message)
     }
   }
 }

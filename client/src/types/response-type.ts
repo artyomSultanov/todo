@@ -8,3 +8,9 @@ export interface ITodolistResponse {
   todos?: ITodo[]
   error: string
 }
+export interface IErrorResponse {
+  status: number
+  data: {
+    message: string
+  }
+}
