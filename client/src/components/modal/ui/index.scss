@@ -1,0 +1,31 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &_active {
+    display: flex;
+  }
+
+  &__content {
+    background-color: var(--item-background-color);
+    width: 50%;
+    padding: 2rem;
+    border-radius: 1rem;
+    cursor: auto;
+
+    @include _1170 {
+      width: 80%;
+    }
+  }
+}

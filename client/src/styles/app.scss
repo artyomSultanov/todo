@@ -1,0 +1,19 @@
+@import 'variables.scss';
+@import 'mixins.scss';
+
+.app {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 16px;
+  width: 60%;
+  height: 92vh;
+  margin: 0 auto;
+  padding-top: 10vh;
+  @include _1170 {
+    width: 80%;
+  }
+  @include _768 {
+    width: 100%;
+  }
+}

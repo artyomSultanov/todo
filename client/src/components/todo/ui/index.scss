@@ -1,0 +1,42 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.todo {
+  width: 100%;
+  min-height: 2rem;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  background-color: var(--item-background-color);
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.2rem;
+  &_completed {
+    opacity: 0.7;
+  }
+  &__checkbox {
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+  &__title {
+    width: 60%;
+    padding: 1rem;
+    overflow-wrap: break-word;
+    display: inline-block;
+    font-size: 1.2rem;
+    margin-right: auto;
+
+    @include _480 {
+      font-size: 0.8rem;
+    }
+  }
+  &__delete {
+    cursor: pointer;
+    color: var(--danger-color);
+    height: 1.6rem;
+    width: 1.6rem;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

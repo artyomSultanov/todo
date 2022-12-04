@@ -1,0 +1,45 @@
+@import '../../styles/variables.scss';
+
+.custom-checkbox {
+  width: 100%;
+  height: 100%;
+  &__label {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 20%;
+    background-color: var(--background-color);
+    border: 1px solid var(--secondary-color);
+
+    &::before {
+      display: none;
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      border-radius: 20%;
+      top: 20%;
+      left: 20%;
+      background-color: var(--success-color);
+    }
+
+    &:hover {
+      border-color: var(--success-color);
+    }
+  }
+  &__input {
+    display: none;
+  }
+  &__label:has(&__input:checked) {
+    border-color: var(--success-color);
+
+    &:hover {
+      border-color: var(--secondary-color);
+    }
+    &::before {
+      display: block;
+    }
+  }
+}
