@@ -2,58 +2,58 @@ const ApiError = require('../exceptions/api-error')
 const todolistService = require('../services/todolist-service')
 
 class TodolistController {
-  async getAll(req, res) {
+  getAll(req, res) {
     try {
       const { userID } = req.cookies
       const { filter } = req.query
 
       if (!userID) throw ApiError.Unauthorized()
 
-      const todos = await todolistService.getAll(userID, filter)
+      const todos = todolistService.getAll(userID, filter)
 
       return res.json(todos)
     } catch (error) {
       return res.status(error.status).json(error.message)
     }
   }
-  async markOne(req, res) {
+  markOne(req, res) {
     try {
       const { userID } = req.cookies
       const { id } = req.params
 
       if (!userID) throw ApiError.Unauthorized()
 
-      await todolistService.markOne(userID, id)
+      todolistService.markOne(userID, id)
 
-      return res.status(200)
+      return res.status(200).json({})
     } catch (error) {
       return res.status(error.status).json(error.message)
     }
   }
-  async addOne(req, res) {
+  addOne(req, res) {
     try {
       const { userID } = req.cookies
       const { title } = req.body
 
       if (!userID) throw ApiError.Unauthorized()
 
-      await todolistService.addOne(userID, title)
+      todolistService.addOne(userID, title)
 
-      return res.status(201)
+      return res.status(201).json({})
     } catch (error) {
       return res.status(error.status).json(error.message)
     }
   }
-  async deleteOne(req, res) {
+  deleteOne(req, res) {
     try {
       const { userID } = req.cookies
       const { id } = req.params
 
       if (!userID) throw ApiError.Unauthorized()
 
-      await todolistService.deleteOne(userID, id)
+      todolistService.deleteOne(userID, id)
 
-      return res.status(200)
+      return res.status(200).json({})
     } catch (error) {
       return res.status(error.status).json(error.message)
     }

@@ -10,9 +10,9 @@ import './index.scss'
 
 const Navbar = () => {
   const navigate = useNavigate()
-  const authState = rootStore.authStore.state
+  const authStore = rootStore.authStore
   const theme = rootStore.themeStore.theme
-  const isAuth = JSON.stringify(authState.user) !== '{}'
+  const isAuth = JSON.stringify(authStore.user) !== '{}'
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     rootStore.themeStore.changeTheme()
@@ -32,7 +32,7 @@ const Navbar = () => {
             <FontAwesomeIcon icon={faSun} />
           )}
         </div>
-        <div className='navbar__user'>{isAuth ? authState.user.email : ''}</div>
+        <div className='navbar__user'>{isAuth ? authStore.user.email : ''}</div>
         {isAuth ? (
           <FontAwesomeIcon
             className='navbar__signout'

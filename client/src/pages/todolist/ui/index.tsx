@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { faAdd } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { observer } from 'mobx-react'
@@ -8,25 +8,21 @@ import rootStore from 'stores/root-store'
 import Modal from 'components/modal'
 import TodoForm from 'components/todo-form'
 
+// import useTodolist from '../model'
 import './index.scss'
-import useTodolist from '../model'
 
 const Todolist = () => {
-  const todolistStore = rootStore.todolistStore
-  const todos = todolistStore.state.todos ?? []
-  const {
-    active,
-    setActive,
-    filter,
-    handleChange,
-    handleAdd,
-    handleSolve,
-    handleDelete,
-  } = useTodolist()
+  const todos = rootStore.todolistStore.todos
+  const [active, setActive] = useState(false)
+  const [filter, setFilter] = useState('all')
+
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setFilter(e.target.value)
+  }
 
   useEffect(() => {
-    todolistStore.getAll(filter)
-  }, [filter, todolistStore])
+    rootStore.todolistStore.getAll(filter)
+  }, [filter])
 
   return (
     <>
@@ -49,14 +45,13 @@ const Todolist = () => {
             <Todo
               key={todo.id}
               todo={todo}
-              handleSolve={handleSolve}
-              handleDelete={handleDelete}
+              getTodos={() => rootStore.todolistStore.getAll(filter)}
             />
           ))}
         </div>
       </div>
       <Modal active={active} setActive={setActive}>
-        <TodoForm handleAdd={handleAdd} />
+        <TodoForm getTodos={() => rootStore.todolistStore.getAll(filter)} />
       </Modal>
     </>
   )

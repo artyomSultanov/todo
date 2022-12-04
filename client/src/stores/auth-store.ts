@@ -1,55 +1,52 @@
-import { IAuthResponse } from 'types/response-type'
-import { RootStoreModel } from 'stores/root-store'
 import { makeAutoObservable, runInAction } from 'mobx'
+
+import { RootStoreModel } from 'stores/root-store'
 import authService from 'services/auth-service'
 import { IUser } from 'types/user-type'
 
 export interface AuthStoreModel {
-  state: IAuthResponse
+  user: IUser
   signup(email: string, password: string): Promise<void>
   signin(email: string, password: string): Promise<void>
 }
 
 class AuthStore implements AuthStoreModel {
-  state: IAuthResponse
+  user: IUser
   private rootStore: RootStoreModel
 
   constructor(rootStore: RootStoreModel) {
     makeAutoObservable(this)
     this.rootStore = rootStore
-    this.state = {
-      user: JSON.parse(sessionStorage.getItem('user') ?? '{}'),
-      error: '',
-    }
+    this.user = JSON.parse(sessionStorage.getItem('user') ?? '{}')
   }
 
   signup = async (email: string, password: string): Promise<void> => {
-    const state: IAuthResponse = await authService.signup(email, password)
+    const user: IUser = await authService.signup(email, password)
 
-    if (JSON.stringify(state.user) !== '')
-      sessionStorage.setItem('user', JSON.stringify(state.user))
+    if (JSON.stringify(user) !== '')
+      sessionStorage.setItem('user', JSON.stringify(user))
 
     this.rootStore.todolistStore.getAll('all')
     runInAction(() => {
-      this.state.user = state.user
+      this.user = user
     })
   }
 
   signin = async (email: string, password: string): Promise<void> => {
-    const state: IAuthResponse = await authService.signin(email, password)
+    const user: IUser = await authService.signin(email, password)
 
-    if (JSON.stringify(state.user) !== '')
-      sessionStorage.setItem('user', JSON.stringify(state.user))
+    if (JSON.stringify(user) !== '')
+      sessionStorage.setItem('user', JSON.stringify(user))
 
     this.rootStore.todolistStore.getAll('all')
     runInAction(() => {
-      this.state.user = state.user
+      this.user = user
     })
   }
 
   signout = () => {
     sessionStorage.removeItem('user')
-    this.state.user = {} as IUser
+    this.user = {} as IUser
   }
 }
 

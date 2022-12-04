@@ -1,0 +1,21 @@
+@import '../../styles/variables.scss';
+
+.not-found {
+  margin: 2rem;
+  &__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 1rem;
+    & > * {
+      text-decoration: none;
+      color: var(--primary-color);
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@ import Layout from 'components/layout'
 import rootStore from 'stores/root-store'
 import Todolist from './todolist'
 import Auth from './auth'
+import NotFound from 'components/not-found'
 
 const Router = () => {
   const authStore = rootStore.authStore
@@ -25,7 +26,7 @@ const Router = () => {
           element={<Todolist />}
           loader={() => rootStore.todolistStore.getAll('all')}
         />
-        <Route path='*' element={<h1>Not found</h1>} />
+        <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>
   )

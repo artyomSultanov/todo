@@ -13,21 +13,16 @@ interface PropsType {
 }
 
 const Auth: React.FC<PropsType> = ({ method, title }) => {
-  const authState = rootStore.authStore.state
-  const user = authState.user
+  const authStore = rootStore.authStore
+  const user = authStore.user
   const navigate = useNavigate()
-  const { email, setEmail, password, setPassword, handleSubmit, handleReset } =
-    useAuth(method)
+  const { email, setEmail, password, setPassword, handleSubmit, handleReset } = useAuth(method)
 
   useEffect(() => {
     if (JSON.stringify(user) !== '{}') {
       navigate('/todolist')
     }
   }, [user, navigate])
-
-  if (authState.error !== '') {
-    alert(authState.error)
-  }
 
   return (
     <form className='auth' onSubmit={handleSubmit}>

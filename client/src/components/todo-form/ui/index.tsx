@@ -3,12 +3,19 @@ import { observer } from 'mobx-react'
 
 import './index.scss'
 import useTodoForm from '../model'
+import rootStore from 'stores/root-store'
 
 interface PropsType {
-  handleAdd(title: string): void
+  getTodos(): void
 }
 
-const TodoForm: React.FC<PropsType> = ({ handleAdd }) => {
+const TodoForm: React.FC<PropsType> = ({ getTodos }) => {
+  const todolistStore = rootStore.todolistStore
+  const handleAdd = (title: string) => {
+    todolistStore.addOne(title)
+    getTodos()
+  }
+
   const { title, handleChange, handleSubmit, handleKey } =
     useTodoForm(handleAdd)
 

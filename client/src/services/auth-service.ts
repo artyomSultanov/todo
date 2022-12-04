@@ -1,42 +1,44 @@
 import { AxiosError } from 'axios'
 import api from 'config/api'
 import { IUser } from 'types/user-type'
-import { IAuthResponse, IErrorResponse } from 'types/response-type'
+import { IErrorResponse } from 'types/response-type'
 
 interface AuthServiceModel {
-  signup(email: string, password: string): Promise<IAuthResponse>
-  signin(email: string, password: string): Promise<IAuthResponse>
+  signup(email: string, password: string): Promise<IUser>
+  signin(email: string, password: string): Promise<IUser>
 }
 
 class AuthService implements AuthServiceModel {
-  async signup(email: string, password: string): Promise<IAuthResponse> {
+  async signup(email: string, password: string): Promise<IUser> {
     try {
       const { data } = await api.post<IUser>('/signup', {
         email,
         password,
       })
 
-      return { user: data, error: '' }
+      return data
     } catch (error) {
       const axiosError = error as AxiosError
       const { status, data }: IErrorResponse =
         axiosError.response as IErrorResponse
-      return this.getError(`Status: ${status}.\nMessage: ${data.message}`)
+      this.getError(`Status: ${status}.\nMessage: ${data}`)
+      return {} as IUser
     }
   }
 
-  async signin(email: string, password: string): Promise<IAuthResponse> {
+  async signin(email: string, password: string): Promise<IUser> {
     try {
       const { data } = await api.post<IUser>('/signin', {
         email,
         password,
       })
-      return { user: data, error: '' }
+      return data
     } catch (error) {
       const axiosError = error as AxiosError
       const { status, data }: IErrorResponse =
         axiosError.response as IErrorResponse
-      return this.getError(`Status: ${status}.\nMessage: ${data.message}`)
+      this.getError(`Status: ${status}.\nMessage: ${data}`)
+      return {} as IUser
     }
   }
 

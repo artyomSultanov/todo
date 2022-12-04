@@ -33,9 +33,10 @@
     }
   }
 
-  &__sugnout {
+  &__signout {
     cursor: pointer;
-
+    width: 2rem;
+    height: 2rem;
     &:hover {
       color: var(--primary-color);
     }

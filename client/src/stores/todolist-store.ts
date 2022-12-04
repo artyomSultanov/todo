@@ -1,10 +1,10 @@
-import { ITodolistResponse } from 'types/response-type'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 import todolistService from 'services/todolist-service'
+import { ITodo } from 'types/todo-type'
 
 export interface TodolistStoreModel {
-  state: ITodolistResponse
+  todos: ITodo[]
   getAll(filter: string): Promise<void>
   markOne(id: string): Promise<void>
   addOne(title: string): Promise<void>
@@ -12,37 +12,30 @@ export interface TodolistStoreModel {
 }
 
 class TodolistStore implements TodolistStoreModel {
-  state: ITodolistResponse = { todos: [], error: '' }
+  todos: ITodo[] = []
 
   constructor() {
     makeAutoObservable(this)
   }
 
   getAll = async (filter: string): Promise<void> => {
-    const state: ITodolistResponse = await todolistService.getAll(filter)
+    const todos: ITodo[] = await todolistService.getAll(filter)
 
     runInAction(() => {
-      this.state.error = state.error
-      this.state.todos = state.todos ?? []
+      this.todos = todos
     })
   }
 
   markOne = async (id: string): Promise<void> => {
-    const state = await todolistService.markOne(id)
-
-    this.state.error = state.error
+    await todolistService.markOne(id)
   }
 
   addOne = async (title: string): Promise<void> => {
-    const state = await todolistService.addOne(title)
-
-    this.state.error = state.error
+    await todolistService.addOne(title)
   }
 
   deleteOne = async (id: string): Promise<void> => {
-    const state = await todolistService.deleteOne(id)
-
-    this.state.error = state.error
+    await todolistService.deleteOne(id)
   }
 }
 

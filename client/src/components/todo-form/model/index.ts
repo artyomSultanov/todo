@@ -9,11 +9,11 @@ const useTodoForm = (handleAdd: (title: string) => void) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    handleAdd(title)
+    if (title.trim() !== '') handleAdd(title)
     setTitle('')
   }
   const handleKey = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.ctrlKey && e.key === 'Enter') {
+    if (e.ctrlKey && e.key === 'Enter' && title.trim() !== '') {
       handleAdd(title)
       setTitle('')
     }
