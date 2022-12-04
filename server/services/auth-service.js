@@ -7,6 +7,7 @@ const UserDto = require('../dto/user-dto')
 
 class AuthService {
   async signup(email, password) {
+    console.log('SERVER SERVICE SIGNUP', email, password)
     if (db.find((user) => user.email === email))
       throw ApiError.BadRequest('Пользователь с таким email уже существует.')
 

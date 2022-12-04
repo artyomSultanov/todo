@@ -4,12 +4,18 @@ const db = require('../db')
 const ApiError = require('../exceptions/api-error')
 
 class TodolistService {
-  async getAll(userID) {
+  async getAll(userID, filter) {
     const user = db.find((user) => user.id === userID)
 
     if (!user) throw ApiError.Unauthorized()
 
-    return user.todos
+    const todos = user.todos.filter((todo) => {
+      if (filter === 'done') return todo.completed
+      if (filter === 'undone') return !todo.completed
+      return true
+    })
+
+    return todos.reverse()
   }
   async markOne(userID, id) {
     const user = db.find((user) => user.id === userID)
@@ -20,8 +26,6 @@ class TodolistService {
       if (todo.id === id) todo.completed = !todo.completed
       return todo
     })
-
-    return user.todos
   }
   async addOne(userID, title) {
     const user = db.find((user) => user.id === userID)
@@ -33,8 +37,6 @@ class TodolistService {
       title,
       completed: false,
     })
-
-    return user.todos
   }
   async deleteOne(userID, id) {
     const user = db.find((user) => user.id === userID)
@@ -42,8 +44,6 @@ class TodolistService {
     if (!user) throw ApiError.Unauthorized()
 
     user.todos = user.todos.filter((todo) => todo.id !== id)
-
-    return user.todos
   }
 }
 

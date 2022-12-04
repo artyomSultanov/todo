@@ -5,10 +5,11 @@ class TodolistController {
   async getAll(req, res) {
     try {
       const { userID } = req.cookies
+      const { filter } = req.query
 
       if (!userID) throw ApiError.Unauthorized()
 
-      const todos = await todolistService.getAll(userID)
+      const todos = await todolistService.getAll(userID, filter)
 
       return res.json(todos)
     } catch (error) {
@@ -25,9 +26,9 @@ class TodolistController {
 
       if (!userID) throw ApiError.Unauthorized()
 
-      const todos = await todolistService.markOne(userID, id)
+      await todolistService.markOne(userID, id)
 
-      return res.json(todos)
+      return res.status(200)
     } catch (error) {
       return res
         .status(error.status)
@@ -41,9 +42,9 @@ class TodolistController {
 
       if (!userID) throw ApiError.Unauthorized()
 
-      const todos = await todolistService.addOne(userID, title)
+      await todolistService.addOne(userID, title)
 
-      res.json(todos)
+      return res.status(201)
     } catch (error) {
       return res
         .status(error.status)
@@ -57,9 +58,9 @@ class TodolistController {
 
       if (!userID) throw ApiError.Unauthorized()
 
-      const todos = await todolistService.deleteOne(userID, id)
+      await todolistService.deleteOne(userID, id)
 
-      res.json(todos)
+      return res.status(200)
     } catch (error) {
       return res
         .status(error.status)
