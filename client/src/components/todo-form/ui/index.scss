@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-around;
 
-  &__input {
+  &__input-field {
     width: 70%;
     resize: none;
     border-radius: 0.5rem;
@@ -21,7 +21,7 @@
     }
   }
 
-  &__button {
+  &__submit-button {
     cursor: pointer;
     height: 4rem;
     padding: 0.5rem 2rem;

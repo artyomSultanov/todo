@@ -9,73 +9,69 @@
   flex-direction: column;
   padding: 3rem;
 
-  &__tools {
-    align-self: start;
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    position: relative;
-    &__add {
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      width: 3rem;
-      height: 3rem;
-      border-radius: 50%;
-      background-color: var(--item-background-color);
-
-      &:hover {
-        opacity: 0.7;
-      }
-
-      &-icon {
-        width: 2rem;
-        height: 2rem;
-        color: var(--primary-color);
-      }
-
-      &::before {
-        content: 'Add';
-        font-weight: 600;
-        position: absolute;
-        font-size: 1rem;
-        display: inline-block;
-        bottom: -1.5rem;
-        left: 0.6rem;
-        opacity: 0.8;
-        color: var(--primary-color);
-      }
-    }
-
-    &__select {
-      cursor: pointer;
-      background-color: var(--item-background-color);
-      border: 3px solid var(--primary-color);
-      border-radius: 1rem;
-      color: var(--text-color);
-      padding: 0.4rem 1rem;
-
-      & option {
-        cursor: pointer;
-        background-color: var(--item-background-color);
-      }
-      &:hover {
-        opacity: 0.8;
-      }
-
-      @include _480 {
-        padding: 0.3rem 0.5rem;
-      }
-    }
-  }
-
-  &__todos {
+  &__items {
     width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 0.2rem;
+  }
+}
+.todolist-features {
+  height: 3rem;
+  align-self: start;
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+
+  &__add-button {
+    cursor: pointer;
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background-color: var(--item-background-color);
+    color: var(--primary-color);
+    position: relative;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &::before {
+      content: 'Add';
+      font-weight: 600;
+      position: absolute;
+      font-size: 1rem;
+      display: inline-block;
+      bottom: -1.5rem;
+      left: 0.6rem;
+      opacity: 0.8;
+      color: var(--primary-color);
+    }
+  }
+
+  &__select-list {
+    cursor: pointer;
+    background-color: var(--item-background-color);
+    border: 3px solid var(--primary-color);
+    border-radius: 1rem;
+    color: var(--text-color);
+    height: 100%;
+    width: 10rem;
+    padding-left: 1rem;
+
+    & > * {
+      cursor: pointer;
+      background-color: var(--item-background-color);
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+
+    @include _480 {
+      padding: 0.3rem 0.5rem;
+    }
   }
 }

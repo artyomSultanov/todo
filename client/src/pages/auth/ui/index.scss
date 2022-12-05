@@ -1,7 +1,7 @@
 @import '../../../styles/variables.scss';
 @import '../../../styles/mixins.scss';
 
-.auth {
+.auth-container {
   width: 60%;
   height: 80vh;
   margin: 0 auto;
@@ -9,19 +9,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
-  &__wrapper {
-    padding: 20%;
-    border-radius: 2rem;
-    background-color: var(--item-background-color);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: center;
+.auth-form {
+  padding: 20%;
+  border-radius: 2rem;
+  background-color: var(--item-background-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
 
-    @include _480 {
-      padding: 1rem;
-    }
+  @include _480 {
+    padding: 1rem;
   }
 
   &__title {
@@ -38,40 +38,40 @@
       border: 1px solid var(--primary-color);
     }
   }
+}
 
-  &__buttons {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+.form-buttons {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 
-    &__submit,
-    &__reset {
-      cursor: pointer;
-      border-radius: 0.5rem;
-      margin-top: 1.2rem;
+  &__submit-button,
+  &__reset-button {
+    cursor: pointer;
+    border-radius: 0.5rem;
+    margin-top: 1.2rem;
+  }
+
+  &__submit-button {
+    width: 5rem;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    color: #000;
+    padding: 0.5rem;
+
+    &:hover {
+      background-color: var(--background-color);
+      color: #fff;
     }
+  }
 
-    &__submit {
-      width: 5rem;
-      background-color: var(--primary-color);
+  &__reset-button {
+    background-color: var(--item-background-color);
+    border: none;
+    border: 1px solid var(--secondary-color);
+    padding: 0.2rem 0.5rem;
+    &:hover {
       border: 1px solid var(--primary-color);
-      color: #000;
-      padding: 0.5rem;
-
-      &:hover {
-        background-color: var(--background-color);
-        color: #fff;
-      }
-    }
-
-    &__reset {
-      background-color: var(--item-background-color);
-      border: none;
-      border: 1px solid var(--secondary-color);
-      padding: 0.2rem 0.5rem;
-      &:hover {
-        border: 1px solid var(--primary-color);
-      }
     }
   }
 }

@@ -1,6 +1,6 @@
 @import '../../../styles/variables.scss';
 
-.navbar {
+.navbar-container {
   position: fixed;
   z-index: 1000;
   background-color: var(--item-background-color);
@@ -8,17 +8,17 @@
   height: 10vh;
   top: 0;
   left: 0;
+}
 
-  &__wrapper {
-    width: 70%;
-    height: 100%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
+.navbar {
+  width: 70%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
-  &__theme {
+  &__theme-button {
     cursor: pointer;
     width: 3rem;
     display: flex;
@@ -33,7 +33,11 @@
     }
   }
 
-  &__signout {
+  &__user-email {
+    color: var(--primary-color);
+  }
+
+  &__signout-button {
     cursor: pointer;
     width: 2rem;
     height: 2rem;
@@ -41,48 +45,43 @@
       color: var(--primary-color);
     }
   }
+}
+.navbar-buttons {
+  display: flex;
 
-  &__user {
-    color: var(--primary-color);
-  }
+  &__signup-button,
+  &__signin-button {
+    border: 1px solid var(--primary-color);
+    box-sizing: border-box;
 
-  &__buttons {
-    display: flex;
+    &:hover {
+      background-color: var(--primary-color);
+    }
 
-    &__signup,
-    &__signin {
-      border: 1px solid var(--primary-color);
-      box-sizing: border-box;
+    &:hover > * {
+      color: #fff;
+      opacity: 1;
+    }
 
-      &:hover {
-        background-color: var(--primary-color);
-      }
+    & > * {
+      display: block;
+      padding: 0.4rem 1rem;
+      text-decoration: none;
+      color: var(--text-color);
+      opacity: 0.6;
 
-      &:hover > &-link {
-        color: #fff;
+      &.active {
+        color: var(--primary-color);
         opacity: 1;
       }
-
-      &-link {
-        display: block;
-        padding: 0.4rem 1rem;
-        text-decoration: none;
-        color: var(--text-color);
-        opacity: 0.6;
-
-        &.active {
-          color: var(--primary-color);
-          opacity: 1;
-        }
-      }
     }
+  }
 
-    &__signup {
-      background-color: var(--item-background-color);
-      border-radius: 1rem 0 0 1rem;
-    }
-    &__signin {
-      border-radius: 0 1rem 1rem 0;
-    }
+  &__signup-button {
+    background-color: var(--item-background-color);
+    border-radius: 1rem 0 0 1rem;
+  }
+  &__signin-button {
+    border-radius: 0 1rem 1rem 0;
   }
 }

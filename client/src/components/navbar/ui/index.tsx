@@ -23,39 +23,31 @@ const Navbar = () => {
   }
 
   return (
-    <div className='navbar'>
-      <div className='navbar__wrapper'>
-        <div className='navbar__theme' onClick={handleClick}>
+    <div className='navbar-container'>
+      <div className='navbar'>
+        <div className='navbar__theme-button' onClick={handleClick}>
           {theme === 'dark' ? (
             <FontAwesomeIcon icon={faMoon} />
           ) : (
             <FontAwesomeIcon icon={faSun} />
           )}
         </div>
-        <div className='navbar__user'>{isAuth ? authStore.user.email : ''}</div>
+        <div className='navbar__user-email'>
+          {isAuth ? authStore.user.email : ''}
+        </div>
         {isAuth ? (
           <FontAwesomeIcon
-            className='navbar__signout'
+            className='navbar__signout-button'
             icon={faSignOut}
             onClick={handleLeave}
           />
         ) : (
-          <ul className='navbar__buttons'>
-            <li className='navbar__buttons__signup'>
-              <NavLink
-                className='navbar__buttons__signup-link'
-                to={'/auth/signup'}
-              >
-                SignUp
-              </NavLink>
+          <ul className='navbar-buttons'>
+            <li className='navbar-buttons__signup-button'>
+              <NavLink to={'/auth/signup'}>SignUp</NavLink>
             </li>
-            <li className='navbar__buttons__signin'>
-              <NavLink
-                className='navbar__buttons__signup-link'
-                to={'/auth/signin'}
-              >
-                SignIn
-              </NavLink>
+            <li className='navbar-buttons__signin-button'>
+              <NavLink to={'/auth/signin'}>SignIn</NavLink>
             </li>
           </ul>
         )}

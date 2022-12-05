@@ -16,7 +16,8 @@ const Auth: React.FC<PropsType> = ({ method, title }) => {
   const authStore = rootStore.authStore
   const user = authStore.user
   const navigate = useNavigate()
-  const { email, setEmail, password, setPassword, handleSubmit, handleReset } = useAuth(method)
+  const { email, setEmail, password, setPassword, handleSubmit, handleReset } =
+    useAuth(method)
 
   useEffect(() => {
     if (JSON.stringify(user) !== '{}') {
@@ -25,11 +26,11 @@ const Auth: React.FC<PropsType> = ({ method, title }) => {
   }, [user, navigate])
 
   return (
-    <form className='auth' onSubmit={handleSubmit}>
-      <div className='auth__wrapper'>
-        <p className='auth__title'>{title}</p>
+    <div className='auth-container'>
+      <form className='auth-form' onSubmit={handleSubmit}>
+        <h2 className='auth-form__title'>{title}</h2>
         <input
-          className='auth__input'
+          className='auth-form__input'
           type='email'
           name='email'
           value={email}
@@ -39,7 +40,7 @@ const Auth: React.FC<PropsType> = ({ method, title }) => {
           placeholder='Email'
         />
         <input
-          className='auth__input'
+          className='auth-form__input'
           type='password'
           name='password'
           value={password}
@@ -48,20 +49,20 @@ const Auth: React.FC<PropsType> = ({ method, title }) => {
           }
           placeholder='Password'
         />
-        <div className='auth__buttons'>
-          <button className='auth__buttons__submit' type='submit'>
+        <div className='form-buttons'>
+          <button className='form-buttons__submit-button' type='submit'>
             Submit
           </button>
           <button
-            className='auth__buttons__reset'
+            className='form-buttons__reset-button'
             type='reset'
             onClick={handleReset}
           >
             Reset
           </button>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   )
 }
 

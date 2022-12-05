@@ -9,9 +9,9 @@ interface PropsType {
 
 const CustomCheckbox: React.FC<PropsType> = ({ isChecked, setChecked }) => (
   <div className='custom-checkbox'>
-    <label className='custom-checkbox__label'>
+    <label className='checkbox-label'>
       <input
-        className='custom-checkbox__input'
+        className='checkbox-label__input'
         type='checkbox'
         name='checkbox'
         checked={isChecked}

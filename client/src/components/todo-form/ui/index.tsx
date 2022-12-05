@@ -22,14 +22,14 @@ const TodoForm: React.FC<PropsType> = ({ getTodos }) => {
   return (
     <form className='todo-form' onSubmit={handleSubmit}>
       <textarea
-        className='todo-form__input'
+        className='todo-form__input-field'
         name='title'
         value={title}
         onChange={handleChange}
         onKeyUp={handleKey}
         autoFocus
       />
-      <button className='todo-form__button' type='submit'>
+      <button className='todo-form__submit-button' type='submit'>
         Add
       </button>
     </form>

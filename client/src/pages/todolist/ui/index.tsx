@@ -8,7 +8,6 @@ import rootStore from 'stores/root-store'
 import Modal from 'components/modal'
 import TodoForm from 'components/todo-form'
 
-// import useTodolist from '../model'
 import './index.scss'
 
 const Todolist = () => {
@@ -27,20 +26,24 @@ const Todolist = () => {
   return (
     <>
       <div className='todolist'>
-        <div className='todolist__tools'>
-          <div className='todolist__tools__add' onClick={() => setActive(true)}>
-            <FontAwesomeIcon
-              className='todolist__tools__add-icon'
-              icon={faAdd}
-            />
-          </div>
-          <select className='todolist__tools__select' onChange={handleChange}>
+        <div className='todolist-features'>
+          <FontAwesomeIcon
+            className='todolist-features__add-button'
+            icon={faAdd}
+            onClick={() => setActive(true)}
+          />
+          {/* <div className='todolist-buttons__add-button' onClick={() => setActive(true)}>
+          </div> */}
+          <select
+            className='todolist-features__select-list'
+            onChange={handleChange}
+          >
             <option value='all'>All</option>
             <option value='done'>Done</option>
             <option value='undone'>Undone</option>
           </select>
         </div>
-        <div className='todolist__todos'>
+        <div className='todolist__items'>
           {todos.map((todo) => (
             <Todo
               key={todo.id}
