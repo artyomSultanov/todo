@@ -32,8 +32,6 @@ const Todolist = () => {
             icon={faAdd}
             onClick={() => setActive(true)}
           />
-          {/* <div className='todolist-buttons__add-button' onClick={() => setActive(true)}>
-          </div> */}
           <select
             className='todolist-features__select-list'
             onChange={handleChange}
