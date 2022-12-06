@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios'
+import axios, { AxiosError } from 'axios'
 import api from 'config/api'
 import { IErrorResponse } from 'types/response-type'
 import { ITodo } from 'types/todo-type'
@@ -19,10 +19,7 @@ class TodolistService implements TodoListServiceModel {
 
       return data
     } catch (error) {
-      const axiosError = error as AxiosError
-      const { status, data }: IErrorResponse =
-        axiosError.response as IErrorResponse
-      this.getError(`Status: ${status}.\nMessage: ${data}`)
+      if (axios.isAxiosError(error)) this.alertAboutError(error)
       return []
     }
   }
@@ -33,10 +30,7 @@ class TodolistService implements TodoListServiceModel {
 
       return
     } catch (error) {
-      const axiosError = error as AxiosError
-      const { status, data }: IErrorResponse =
-        axiosError.response as IErrorResponse
-      this.getError(`Status: ${status}.\nMessage: ${data}`)
+      if (axios.isAxiosError(error)) this.alertAboutError(error)
     }
   }
 
@@ -46,10 +40,7 @@ class TodolistService implements TodoListServiceModel {
         title,
       })
     } catch (error) {
-      const axiosError = error as AxiosError
-      const { status, data }: IErrorResponse =
-        axiosError.response as IErrorResponse
-      this.getError(`Status: ${status}.\nMessage: ${data}`)
+      if (axios.isAxiosError(error)) this.alertAboutError(error)
     }
   }
 
@@ -57,23 +48,19 @@ class TodolistService implements TodoListServiceModel {
     try {
       await api.post(`/todolist/${id}`)
     } catch (error) {
-      const axiosError = error as AxiosError
-      const { status, data }: IErrorResponse =
-        axiosError.response as IErrorResponse
-      this.getError(`Status: ${status}.\nMessage: ${data}`)
+      if (axios.isAxiosError(error)) this.alertAboutError(error)
     }
   }
 
-  private getError(error: string) {
-    let res = { error: 'An unexpected error.' }
+  private alertAboutError(error: AxiosError): void {
+    const axiosError = error
+    const { status, data }: IErrorResponse =
+      axiosError.response as IErrorResponse
 
-    if (error !== '') {
-      res = { error }
-    }
+    const err = `Status: ${status}.\nMessage: ${data}`
 
     // Заглушка
-    alert(res.error)
-    return res
+    alert(err)
   }
 }
 

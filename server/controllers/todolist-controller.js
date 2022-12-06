@@ -2,7 +2,7 @@ const ApiError = require('../exceptions/api-error')
 const todolistService = require('../services/todolist-service')
 
 class TodolistController {
-  getAll(req, res) {
+  getAll(req, res, next) {
     try {
       const { userID } = req.cookies
       const { filter } = req.query
@@ -13,10 +13,10 @@ class TodolistController {
 
       return res.json(todos)
     } catch (error) {
-      return res.status(error.status).json(error.message)
+      next(error)
     }
   }
-  markOne(req, res) {
+  markOne(req, res, next) {
     try {
       const { userID } = req.cookies
       const { id } = req.params
@@ -27,10 +27,10 @@ class TodolistController {
 
       return res.status(200).json({})
     } catch (error) {
-      return res.status(error.status).json(error.message)
+      next(error)
     }
   }
-  addOne(req, res) {
+  addOne(req, res, next) {
     try {
       const { userID } = req.cookies
       const { title } = req.body
@@ -41,10 +41,10 @@ class TodolistController {
 
       return res.status(201).json({})
     } catch (error) {
-      return res.status(error.status).json(error.message)
+      next(error)
     }
   }
-  deleteOne(req, res) {
+  deleteOne(req, res, next) {
     try {
       const { userID } = req.cookies
       const { id } = req.params
@@ -55,7 +55,7 @@ class TodolistController {
 
       return res.status(200).json({})
     } catch (error) {
-      return res.status(error.status).json(error.message)
+      next(error)
     }
   }
 }

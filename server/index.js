@@ -5,6 +5,7 @@ const path = require('path')
 
 const config = require('./config')
 const router = require('./routes')
+const errorMiddleware = require('./middlewares/error-middleware')
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(
 )
 
 app.use(router)
+app.use(errorMiddleware)
 
 app.listen(config.port, () => {
   console.log(`App listening on port ${config.port}`)
