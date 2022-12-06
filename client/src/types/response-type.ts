@@ -10,7 +10,5 @@ export interface ITodolistResponse {
 }
 export interface IErrorResponse {
   status: number
-  data: {
-    message: string
-  }
+  data: string
 }

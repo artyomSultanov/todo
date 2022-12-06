@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios'
+import axios, { AxiosError } from 'axios'
 import api from 'config/api'
 import { IUser } from 'types/user-type'
 import { IErrorResponse } from 'types/response-type'
@@ -18,10 +18,7 @@ class AuthService implements AuthServiceModel {
 
       return data
     } catch (error) {
-      const axiosError = error as AxiosError
-      const { status, data }: IErrorResponse =
-        axiosError.response as IErrorResponse
-      this.getError(`Status: ${status}.\nMessage: ${data}`)
+      if (axios.isAxiosError(error)) this.alertAboutError(error)
       return {} as IUser
     }
   }
@@ -34,26 +31,20 @@ class AuthService implements AuthServiceModel {
       })
       return data
     } catch (error) {
-      const axiosError = error as AxiosError
-      const { status, data }: IErrorResponse =
-        axiosError.response as IErrorResponse
-      this.getError(`Status: ${status}.\nMessage: ${data}`)
+      if (axios.isAxiosError(error)) this.alertAboutError(error)
       return {} as IUser
     }
   }
 
-  private getError(error: string) {
-    let res = { user: {} as IUser, error: 'An unexpected error.' }
+  private alertAboutError(error: AxiosError): void {
+    const axiosError = error
+    const { status, data }: IErrorResponse =
+      axiosError.response as IErrorResponse
 
-    if (error !== '')
-      res = {
-        user: {} as IUser,
-        error,
-      }
+    const err = `Status: ${status}.\nMessage: ${data}`
 
     // Заглушка
-    alert(res.error)
-    return res
+    alert(err)
   }
 }
 
