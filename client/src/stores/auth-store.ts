@@ -23,10 +23,11 @@ class AuthStore implements AuthStoreModel {
   signup = async (email: string, password: string): Promise<void> => {
     const user: IUser = await authService.signup(email, password)
 
-    if (JSON.stringify(user) !== '')
+    if (JSON.stringify(user) !== '{}') {
       sessionStorage.setItem('user', JSON.stringify(user))
+      this.rootStore.todolistStore.getAll('all')
+    }
 
-    this.rootStore.todolistStore.getAll('all')
     runInAction(() => {
       this.user = user
     })
@@ -35,18 +36,19 @@ class AuthStore implements AuthStoreModel {
   signin = async (email: string, password: string): Promise<void> => {
     const user: IUser = await authService.signin(email, password)
 
-    if (JSON.stringify(user) !== '')
+    if (JSON.stringify(user) !== '{}') {
       sessionStorage.setItem('user', JSON.stringify(user))
-
-    this.rootStore.todolistStore.getAll('all')
+      this.rootStore.todolistStore.getAll('all')
+    }
     runInAction(() => {
       this.user = user
     })
   }
 
-  signout = () => {
+  signout = async () => {
     sessionStorage.removeItem('user')
     this.user = {} as IUser
+    await authService.signout()
   }
 }
 
