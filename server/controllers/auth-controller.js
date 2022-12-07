@@ -1,7 +1,7 @@
 const authService = require('../services/auth-service')
 
 class AuthController {
-  async signup(req, res) {
+  async signup(req, res, next) {
     try {
       const { email, password } = req.body
 
@@ -13,11 +13,11 @@ class AuthController {
       })
       return res.status(201).json(userData)
     } catch (error) {
-      return res.status(error.status).json(error.message)
+      next(error)
     }
   }
 
-  async signin(req, res) {
+  async signin(req, res, next) {
     try {
       const { email, password } = req.body
 
@@ -29,7 +29,7 @@ class AuthController {
       })
       return res.json(userData)
     } catch (error) {
-      return res.status(error.status).json(error.message)
+      next(error)
     }
   }
 
