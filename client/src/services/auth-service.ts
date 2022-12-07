@@ -42,6 +42,17 @@ class AuthService implements AuthServiceModel {
     }
   }
 
+  async signout(): Promise<void> {
+    try {
+      await api.post('/signout')
+    } catch (error) {
+      const axiosError = error as AxiosError
+      const { status, data }: IErrorResponse =
+        axiosError.response as IErrorResponse
+      this.getError(`Status: ${status}.\nMessage: ${data}`)
+    }
+  }
+
   private getError(error: string) {
     let res = { user: {} as IUser, error: 'An unexpected error.' }
 

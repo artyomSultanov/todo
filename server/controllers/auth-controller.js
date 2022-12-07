@@ -32,6 +32,16 @@ class AuthController {
       return res.status(error.status).json(error.message)
     }
   }
+
+  async signout(_, res) {
+    try {
+      res.clearCookie('userID')
+
+      res.sendStatus(200)
+    } catch (error) {
+      return res.status(error.status).json(error.message)
+    }
+  }
 }
 
 module.exports = new AuthController()

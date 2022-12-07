@@ -18,8 +18,8 @@ const Navbar = () => {
     rootStore.themeStore.changeTheme()
   }
   const handleLeave = () => {
-    rootStore.authStore.signout()
     navigate('/auth/signin')
+    rootStore.authStore.signout()
   }
 
   return (
