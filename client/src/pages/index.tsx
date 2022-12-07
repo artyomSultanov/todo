@@ -15,11 +15,11 @@ const Router = () => {
         <Route path='/' element={<Navigate to='/auth/signup' />} />
         <Route
           path='/auth/signup'
-          element={<Auth method={authStore.signup} title='Please, signup :)' />}
+          element={<Auth method={authStore.signup} title='SIGNUP :)' />}
         />
         <Route
           path='/auth/signin'
-          element={<Auth method={authStore.signin} title='Please, signin :)' />}
+          element={<Auth method={authStore.signin} title='SIGNIN :3' />}
         />
         <Route
           path='/todolist'
