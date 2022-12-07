@@ -33,13 +33,13 @@ class AuthController {
     }
   }
 
-  async signout(_, res) {
+  async signout(_, res, next) {
     try {
       res.clearCookie('userID')
 
       res.sendStatus(200)
     } catch (error) {
-      return res.status(error.status).json(error.message)
+      next(error)
     }
   }
 }
