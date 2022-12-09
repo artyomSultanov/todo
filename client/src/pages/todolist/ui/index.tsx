@@ -9,9 +9,12 @@ import Modal from 'components/modal'
 import TodoForm from 'components/todo-form'
 
 import './index.scss'
+import { useNavigate } from 'react-router-dom'
 
 const Todolist = () => {
   const todos = rootStore.todolistStore.todos
+  const navigate = useNavigate()
+  const user = rootStore.authStore.user
   const [active, setActive] = useState(false)
   const [filter, setFilter] = useState('all')
 
@@ -20,8 +23,12 @@ const Todolist = () => {
   }
 
   useEffect(() => {
-    rootStore.todolistStore.getAll(filter)
-  }, [filter])
+    if (JSON.stringify(user) === '{}') {
+      navigate('/auth/signup')
+    } else {
+      rootStore.todolistStore.getAll(filter)
+    }
+  }, [filter, user, navigate])
 
   return (
     <>
